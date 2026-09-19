@@ -1,0 +1,24 @@
+# Contributor: Alonix Team <team@alonix.example.com>
+# Maintainer: Alonix Team <team@alonix.example.com>
+pkgname=alo
+pkgver=1.0
+pkgrel=0
+pkgdesc="Alonix package manager wrapper for apk"
+url="..."
+arch="all"
+license="MIT"
+depends="apk-tools"
+source=""
+builddir="$srcdir/$pkgname-$pkgver"
+
+package() {
+	mkdir -p "$pkgdir/usr/bin"
+	cat > "$pkgdir/usr/bin/alo" <<'EOF'
+#!/bin/sh
+# Alonix package manager - wrapper for apk
+exec /sbin/apk "$@"
+EOF
+	chmod +x "$pkgdir/usr/bin/alo"
+}
+
+sha512sums=""
