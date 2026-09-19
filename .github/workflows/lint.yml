@@ -1,14 +1,27 @@
-name: Lint
+name: Release Alonix Packages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+
+permissions:
+  contents: write
 
 jobs:
-  shellcheck:
-    name: Shellcheck
+  release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@master
+      - uses: actions/checkout@v4
+      
+      - name: Build and Release
+        uses: ivanvc/abuild-releaser-action@v1.2.0
+        with:
+          author: 'Alonix'
+          rsa_public_key: ${{ secrets.RSA_PUBLIC_KEY }}
+          rsa_private_key: ${{ secrets.RSA_PRIVATE_KEY }}
+          alpine_branch: 'v3.24'
+          package_dirs: 'main/*'
+          generate_single_index_page: 'true'
+          generate_index_pages: 'true'
+          commit_message: 'Alonix packages update'
