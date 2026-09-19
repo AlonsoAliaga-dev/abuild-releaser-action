@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:    # ← این خط رو اضافه کن
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -21,7 +21,7 @@ jobs:
           author: 'Alonix'
           rsa_public_key: ${{ secrets.RSA_PUBLIC_KEY }}
           rsa_private_key: ${{ secrets.RSA_PRIVATE_KEY }}
-          alpine_branch: 'v3.24'
+          alpine_branch: 'edge'
           package_dirs: 'main/*'
           generate_single_index_page: 'true'
           generate_index_pages: 'true'
